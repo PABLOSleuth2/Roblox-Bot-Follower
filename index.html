@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Roblox Followers</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Purchase Roblox Followers</h1>
+        <form id="botForm">
+            <label for="username" class="label">Roblox Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="botCount" class="label">How many followers do you need? (1 - 70):</label>
+            <input type="number" id="botCount" name="botCount" min="1" max="70" required>
+
+            <button type="submit" class="submit-btn">Purchase</button>
+        </form>
+        <div id="priceOutput" class="price-output"></div>
+
+        <!-- Navigation buttons to other pages -->
+        <div class="page-navigation">
+            <button onclick="location.href='group-join.html'" class="nav-btn">Group Join Bots</button>
+            <button onclick="location.href='group-message.html'" class="nav-btn">Group Message Bots</button>
+        </div>
+    </div>
+
+    <!-- Add GeoIP-based translation script -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Detect user's country using IP API
+        axios.get('http://ip-api.com/json/')
+            .then(response => {
+                const country = response.data.country;
+                if (country === 'Kazakhstan' || country === 'Russia') {
+                    translateToRussian(); // Call the function to translate the page
+                }
+            })
+            .catch(error => console.log('Error fetching location:', error));
+
+        // Function to translate the page content to Russian
+        function translateToRussian() {
+            document.querySelector('.title').innerText = 'Купить Followers Roblox';
+            document.querySelector('label[for="username"]').innerText = 'Имя пользователя Roblox:';
+            document.querySelector('label[for="botCount"]').innerText = 'Сколько Followers вам нужно? (1 - 70):';
+            document.querySelector('.submit-btn').innerText = 'Купить';
+            document.querySelector('.nav-btn:nth-child(1)').innerText = 'Боты для вступления в группу';
+            document.querySelector('.nav-btn:nth-child(2)').innerText = 'Боты для сообщений в группе';
+        }
+    </script>
+</body>
+</html>

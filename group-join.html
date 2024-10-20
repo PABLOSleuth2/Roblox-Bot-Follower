@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Bot Joining</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title" id="pageTitle">Group Bot Joining</h1>
+        <form id="groupJoinForm">
+            <label for="groupName" class="label" id="usernameLabel">Roblox Username:</label>
+            <input type="text" id="groupName" name="groupName" required>
+
+            <label for="botCount" class="label" id="botCountLabel">How many accounts will join the group? (1 - 70):</label>
+            <input type="number" id="botCount" name="botCount" min="1" max="70" required>
+
+            <button type="submit" class="submit-btn" id="submitButton">Purchase</button>
+        </form>
+        <div id="priceOutput" class="price-output"></div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Detect user's country using IP API
+        axios.get('http://ip-api.com/json/')
+            .then(response => {
+                const country = response.data.country;
+                if (country === 'Kazakhstan' || country === 'Russia') {
+                    translateToRussian(); // Call the function to translate the page
+                }
+            })
+            .catch(error => console.log('Error fetching location:', error));
+
+        // Function to translate the page content to Russian
+        function translateToRussian() {
+            document.getElementById('pageTitle').innerText = 'покупайте ботов и присоединяйтесь к группе';
+    document.getElementById('usernameLabel').innerText = 'Имя пользователя Roblox:';
+    document.getElementById('botCountLabel').innerText = 'Сколько аккаунтов присоединятся к группе? (1 - 70):';
+    document.getElementById('submitButton').innerText = 'Купить';
+        }
+    </script>
+</body>
+</html>
